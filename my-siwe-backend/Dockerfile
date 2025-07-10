@@ -3,13 +3,9 @@ FROM python:3.13-slim
 
 WORKDIR /app
 
-# Install poetry (or copy requirements.txt)
-RUN pip install poetry
-
-COPY poetry.lock pyproject.toml ./
-
 # Install dependencies
-RUN poetry config virtualenvs.create false && poetry install --no-dev --no-root
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY ./app /app/app
 
